@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20sp"
+    tools:context=".SignUpActivity">
+
+    <EditText
+        android:id="@+id/signUpEmailId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="EMAIL"/>
+    <EditText
+        android:id="@+id/signUpPasswordId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="PASSWORD"/>
+    <EditText
+        android:id="@+id/signUpNameId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="NAME"/>
+    <EditText
+        android:id="@+id/signUpInstitutionId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="INSTITUTION"/>
+    <EditText
+        android:id="@+id/signUpContactId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="CONTACT NO."/>
+    <EditText
+        android:id="@+id/signUpClassId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="CLASSES WANTS TO TEACH"/>
+    <EditText
+        android:id="@+id/signUpSubjectId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="SUBJECTS WANTS TO TEACH"/>
+    <EditText
+        android:id="@+id/signUpSalaryId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="SALARY EXPECTATION"/>
+    <Button
+        android:id="@+id/signUpButtonId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SIGN UP"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+    <ProgressBar
+        android:id="@+id/progressBarId"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

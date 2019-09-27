@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="15sp"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NAME"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/nameTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="rony"
+        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="INSTITUTION"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/institutionTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="rony"
+        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CLASSES WANTS TO TEACH"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/classTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="rony"
+        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SUBJECTS WANTS TO TEACH"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/subjectTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="rony"
+        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SALARY EXPECTATION"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/salaryTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="rony"
+        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CONTACT NO."
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/contactTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="rony"
+        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="EMAIL"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/emailTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="rony"
+        android:textSize="20sp"
+        android:layout_marginBottom="20dp"
+        />
+</LinearLayout>

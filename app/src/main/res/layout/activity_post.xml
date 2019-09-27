@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15sp"
+    tools:context=".PostActivity">
+
+    <EditText
+        android:id="@+id/postDescriptionEditTextId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="Add description"/>
+    <EditText
+        android:id="@+id/postClassEditTextId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="Class"/>
+    <EditText
+        android:id="@+id/postSubjectEditTextId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="Subject"/>
+    <EditText
+        android:id="@+id/postDaysEditTextId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="Days per week"/>
+    <EditText
+        android:id="@+id/postSalaryEditTextId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="Salary per month"/>
+    <EditText
+        android:id="@+id/postAddressEditTextId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="Address"/>
+    <EditText
+        android:id="@+id/postContactEditTextId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="Contact No."/>
+
+    <Button
+        android:id="@+id/postButtonId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="POST"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+
+</LinearLayout>
