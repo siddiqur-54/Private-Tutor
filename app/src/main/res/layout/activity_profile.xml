@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="15sp"
+    android:orientation="vertical"
     tools:context=".ProfileActivity">
 
     <TextView
@@ -13,5 +14,10 @@
         android:text="You have successfully signed in"
         android:textSize="20sp"
         android:textStyle="bold"/>
+    <Button
+        android:id="@+id/verifyProfileButtonId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VERIFY PROFILE"/>
 
 </LinearLayout>

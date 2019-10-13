@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ASK A. B. M. SIDDIQUR RAHMAN"
+        android:text=""
         android:textStyle="bold"
         android:textSize="20sp"/>
 
