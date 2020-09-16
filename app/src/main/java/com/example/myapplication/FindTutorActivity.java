@@ -37,14 +37,14 @@ public class FindTutorActivity extends AppCompatActivity implements View.OnClick
         searchTutorInstitutionEditText=(EditText)findViewById(R.id.searchTutorInstitutionEditTextId);
         searchTutorSubjectEditText=(EditText)findViewById(R.id.searchTutorSubjectEditTextId) ;
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Tutors");
+        databaseReference = FirebaseDatabase.getInstance().getReference("tutor");
         tutorList = new ArrayList<>();
         customAdapterTutor = new CustomAdapterTutor(FindTutorActivity.this, tutorList);
         listViewTutor = findViewById(R.id.listViewTutorId);
 
         searchTutorButton.setOnClickListener(this);
     }
-    public void onStart(){
+    public void onResume(){
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -52,7 +52,10 @@ public class FindTutorActivity extends AppCompatActivity implements View.OnClick
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                 {
                     Tutor tutor=dataSnapshot1.getValue(Tutor.class);
-                    tutorList.add(tutor);
+                    if(!tutor.getName().isEmpty())
+                    {
+                        tutorList.add(tutor);
+                    }
                 }
 
                 listViewTutor.setAdapter(customAdapterTutor);
@@ -64,7 +67,7 @@ public class FindTutorActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
-        super.onStart();
+        super.onResume();
     }
 
     @Override

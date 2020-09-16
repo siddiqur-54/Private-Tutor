@@ -65,9 +65,10 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                 Tutor tutor=dataSnapshot.getValue(Tutor.class);
                 name=tutor.getName();
 
-                if(name=="")
+                if(name.isEmpty())
                 {
                     Toast.makeText(getApplicationContext(),"Please set up your profile first",Toast.LENGTH_LONG).show();
+                    finish();
                     Intent intent=new Intent(getApplicationContext(),ProfileActivity.class);
                     startActivity(intent);
                 }
@@ -119,6 +120,9 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
             databaseReference.child(uid).setValue(post);
             Toast.makeText(getApplicationContext(),"Post is added",Toast.LENGTH_LONG).show();
+
+            Intent intent=new Intent(getApplicationContext(),ProfileActivity.class);
+            startActivity(intent);
         }
     }
 

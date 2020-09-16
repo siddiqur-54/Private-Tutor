@@ -25,8 +25,6 @@ public class SearchTutorActivity extends AppCompatActivity{
     DatabaseReference databaseReference;
     private List<Tutor> tutorList;
     private CustomAdapterTutor customAdapterTutor;
-    FirebaseAuth mAuth;
-    String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,19 +32,15 @@ public class SearchTutorActivity extends AppCompatActivity{
         setContentView(R.layout.activity_search_tutor);
         setTitle("TUTORS LIST");
 
-        mAuth=FirebaseAuth.getInstance();
-
-
         tutorList = new ArrayList<>();
         customAdapterTutor = new CustomAdapterTutor(SearchTutorActivity.this, tutorList);
         listViewTutor = findViewById(R.id.listViewTutorId);
     }
-    public void onStart(){
+    public void onResume(){
         final String searchValueInstitution=getIntent().getStringExtra("searchValueInstitution");
         final String searchValueSubject=getIntent().getStringExtra("searchValueSubject");
 
-        uid=mAuth.getCurrentUser().getUid();
-        databaseReference=FirebaseDatabase.getInstance().getReference("tutor").child(uid);
+        databaseReference=FirebaseDatabase.getInstance().getReference("tutor");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -56,7 +50,7 @@ public class SearchTutorActivity extends AppCompatActivity{
                 {
                     Tutor tutor=dataSnapshot1.getValue(Tutor.class);
 
-                    if(tutor.getName()!="") {
+                    if(!tutor.getName().isEmpty()) {
                         String mainValueInstitution = tutor.getInstitution();
                         String mainValueSubject = tutor.getSubject();
                         if ((searchValueInstitution.compareToIgnoreCase(mainValueInstitution) == 0) && (searchValueSubject.compareToIgnoreCase(mainValueSubject) == 0)) {
@@ -78,6 +72,6 @@ public class SearchTutorActivity extends AppCompatActivity{
             }
         });
 
-        super.onStart();
+        super.onResume();
     }
 }

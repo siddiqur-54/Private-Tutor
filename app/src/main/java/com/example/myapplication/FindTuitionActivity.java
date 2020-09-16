@@ -25,20 +25,16 @@ import static com.example.myapplication.R.id.searchTuitionClassEditTextId;
 public class FindTuitionActivity extends AppCompatActivity implements View.OnClickListener {
     private ListView listView;
     DatabaseReference databaseReference;
-    FirebaseAuth mAuth;
     private List<Post> postList;
     private CustomAdapter customAdapter;
     private Button searchTuitionButton;
     private EditText searchTuitionClassEditText,searchTuitionSubjectEditText;
-    String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_tuition);
         setTitle("TUITION LIST");
-
-        mAuth=FirebaseAuth.getInstance();
 
         searchTuitionButton=(Button)findViewById(R.id.searchTuitionButtonId);
         searchTuitionClassEditText=(EditText)findViewById(R.id.searchTuitionClassEditTextId);
@@ -50,9 +46,9 @@ public class FindTuitionActivity extends AppCompatActivity implements View.OnCli
 
         searchTuitionButton.setOnClickListener(this);
     }
-    public void onStart(){
-        uid=mAuth.getCurrentUser().getUid();
-        databaseReference=FirebaseDatabase.getInstance().getReference("tuition").child(uid);
+    public void onResume(){
+
+        databaseReference=FirebaseDatabase.getInstance().getReference("tuition");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -62,7 +58,7 @@ public class FindTuitionActivity extends AppCompatActivity implements View.OnCli
                 {
                     Post post=dataSnapshot1.getValue(Post.class);
 
-                    if(post.getDescription()!="")
+                    if(!post.getDescription().isEmpty())
                     {
                         postList.add(post);
                     }
@@ -77,7 +73,7 @@ public class FindTuitionActivity extends AppCompatActivity implements View.OnCli
             }
         });
 
-        super.onStart();
+        super.onResume();
     }
 
     @Override

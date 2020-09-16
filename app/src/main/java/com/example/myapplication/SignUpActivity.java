@@ -26,10 +26,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private Button signUpButton;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
-    private  Intent intent;
     DatabaseReference databaseReference;
-    private String uid,postName,postEmail,postDate,postDescription,postClass,postSubject,postDay,
-            postSalary,postAddress,postContact;
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +67,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
         {
-            signUpEmail.setError("Please eneter a valid email");
+            signUpEmail.setError("Please enter a valid email");
             signUpEmail.requestFocus();
             return;
         }
-        if(password.length()<5)
+        if(password.length()<6)
         {
             signUpPassword.setError("password length minimum 5 characters");
             signUpPassword.requestFocus();
@@ -89,7 +87,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         if(task.isSuccessful())
                         {
                             saveTutor();
-                            Toast.makeText(getApplicationContext(),"Registration is successful",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"Sign Up is successful",Toast.LENGTH_LONG).show();
                             Intent intent=new Intent(getApplicationContext(),VerifyActivity.class);
                             startActivity(intent);
                         }
@@ -101,7 +99,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             }
                             else
                             {
-                                Toast.makeText(getApplicationContext(),"Registration is unsuccessful",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"Sign Up is unsuccessful",Toast.LENGTH_LONG).show();
                             }
                         }
                     }
@@ -110,25 +108,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     public void saveTutor()
     {
-        String name="";
-        String contact="";
-        String institution="";
-        String subject="";
-        String classes="";
-        String salary="";
-        Tutor tutor=new Tutor(name,institution,classes,subject,salary,contact);
+        Tutor tutor=new Tutor("","","","","","");
 
-        postName="";
-        postEmail="";
-        postDate="";
-        postDescription="";
-        postClass="";
-        postSubject="";
-        postDay="";
-        postSalary="";
-        postAddress="";
-        postContact="";
-        Post post=new Post(postName,postEmail,postDate,postDescription,postClass,postSubject,postDay,postSalary,postAddress,postContact);
+        Post post=new Post("","","","","","","","","","");
 
         uid=mAuth.getCurrentUser().getUid();
         databaseReference=FirebaseDatabase.getInstance().getReference("tutor");

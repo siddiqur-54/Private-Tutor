@@ -123,7 +123,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
             if(access==1){
                 Tutor tutor=new Tutor(name,ins,cla,sub,sal,con);
-                Post post=new Post(pName,pEmail,pDate,pDes,pCla,pSub,pDay,pSal,pAdd,pCon);
+                Post post=new Post(name,pEmail,pDate,pDes,pCla,pSub,pDay,pSal,pAdd,pCon);
 
                 databaseReference=FirebaseDatabase.getInstance().getReference("tutor");
                 databaseReference.child(uid).setValue(tutor);

@@ -12,8 +12,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button findTuitionButton,findTutorButton,postTuitionButton,
-            helpButton,contactButton,editProfileButton;
+    private Button findTuitionButton,findTutorButton,postTuitionButton
+            ,contactButton,editProfileButton,myPostButton,signOutButton;
     FirebaseAuth mAuth;
 
     @Override
@@ -27,16 +27,18 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         findTuitionButton=(Button)findViewById(R.id.findTuitionButtonId);
         findTutorButton=(Button)findViewById(R.id.findTutorButtonId);
         postTuitionButton=(Button)findViewById(R.id.postTuitionButtonId);
-        helpButton=(Button)findViewById(R.id.helpButtonId);
+        signOutButton=(Button)findViewById(R.id.signOutButtonId);
         contactButton=(Button)findViewById(R.id.contactButtonId);
         editProfileButton=(Button)findViewById(R.id.editProfileButtonId);
+        myPostButton=(Button)findViewById(R.id.myPostButtonId);
 
         findTuitionButton.setOnClickListener(this);
         findTutorButton.setOnClickListener(this);
         postTuitionButton.setOnClickListener(this);
-        helpButton.setOnClickListener(this);
         contactButton.setOnClickListener(this);
         editProfileButton.setOnClickListener(this);
+        myPostButton.setOnClickListener(this);
+        signOutButton.setOnClickListener(this);
 
     }
 
@@ -45,6 +47,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         if(view.getId()==R.id.findTuitionButtonId)
         {
             Intent intent=new Intent(getApplicationContext(),FindTuitionActivity.class);
+            startActivity(intent);
+        }
+        else if(view.getId()==R.id.signOutButtonId)
+        {
+            mAuth.signOut();
+            Toast.makeText(getApplicationContext(),"Signed Out Successfully",Toast.LENGTH_LONG).show();
+            Intent intent=new Intent(getApplicationContext(),MainActivity.class);
             startActivity(intent);
         }
         else if(view.getId()==R.id.findTutorButtonId)
@@ -57,11 +66,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             Intent intent=new Intent(getApplicationContext(),PostActivity.class);
             startActivity(intent);
         }
-        else if(view.getId()==R.id.helpButtonId)
-        {
-            Intent intent=new Intent(getApplicationContext(),HelpActivity.class);
-            startActivity(intent);
-        }
         else if(view.getId()==R.id.contactButtonId)
         {
             Intent intent=new Intent(getApplicationContext(),ContactActivity.class);
@@ -70,6 +74,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         else if(view.getId()==R.id.editProfileButtonId)
         {
             Intent intent=new Intent(getApplicationContext(),EditProfileActivity.class);
+            startActivity(intent);
+        }
+        else if(view.getId()==R.id.myPostButtonId)
+        {
+            Intent intent=new Intent(getApplicationContext(),MyPostActivity.class);
             startActivity(intent);
         }
     }

@@ -27,7 +27,7 @@ public class MyPostActivity extends AppCompatActivity implements View.OnClickLis
     private Button deletePost;
     FirebaseAuth mAuth;
     DatabaseReference databaseReference;
-    String uid,name,email,date,des,cla,sub,day,sal,add,con,postName,postEmail,
+    String uid,des,postName,postEmail,
             postDate,postDescription,postClass,postSubject,postDay,postSalary,postAddress,postContact;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +39,12 @@ public class MyPostActivity extends AppCompatActivity implements View.OnClickLis
         emailPost=(TextView)findViewById(R.id.emailPostId);
         datePost=(TextView)findViewById(R.id.datePostId);
         desPost=(TextView)findViewById(R.id.desPostId);
-        classPost=(TextView)findViewById(R.id.classTextViewId);
-        subjectPost=(TextView)findViewById(R.id.subjectTextViewId);
+        classPost=(TextView)findViewById(R.id.classPostId);
+        subjectPost=(TextView)findViewById(R.id.subjectPostId);
         dayPost=(TextView)findViewById(R.id.dayPostId);
-        salaryPost=(TextView)findViewById(R.id.salaryTextViewId);
+        salaryPost=(TextView)findViewById(R.id.salaryPostId);
         addressPost=(TextView)findViewById(R.id.addressPostId);
-        contactPost=(TextView)findViewById(R.id.contactTextViewId);
+        contactPost=(TextView)findViewById(R.id.contactPostId);
 
         mAuth=FirebaseAuth.getInstance();
 
@@ -59,45 +59,70 @@ public class MyPostActivity extends AppCompatActivity implements View.OnClickLis
 
         uid=mAuth.getCurrentUser().getUid();
         databaseReference= FirebaseDatabase.getInstance().getReference("tuition").child(uid);
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Post post=dataSnapshot.getValue(Post.class);
-                name=post.getName();
-                email=post.getEmail();
-                date=post.getDate();
-                des=post.getDescription();
-                cla=post.getClasses();
-                sub=post.getSubjects();
-                day=post.getDays();
-                sal=post.getSalary();
-                add=post.getAddress();
-                con=post.getContact();
 
-                if(des!="")
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Post post=dataSnapshot.getValue(Post.class);
+
+                if(!post.getDescription().isEmpty())
                 {
                     deletePost.setVisibility(View.VISIBLE);
-                    namePost.setText(name);
-                    emailPost.setText(email);
-                    datePost.setText(date);
-                    desPost.setText(des);
-                    classPost.setText(cla);
-                    subjectPost.setText(sub);
-                    dayPost.setText(day);
-                    salaryPost.setText(sal);
-                    addressPost.setText(add);
-                    contactPost.setText(con);
+
+                    namePost.setText(post.getName());
+                    emailPost.setText(post.getEmail());
+                    datePost.setText(post.getDate());
+                    desPost.setText(post.getDescription());
+                    classPost.setText(post.getClasses());
+                    subjectPost.setText(post.getSubjects());
+                    dayPost.setText(post.getDays());
+                    salaryPost.setText(post.getSalary());
+                    addressPost.setText(post.getAddress());
+                    contactPost.setText(post.getContact());
                 }
                 else
                 {
-                    emailPost.setText("No Post Available");
+                    emptyPost.setText("No Post Available");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        /*databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Post post=dataSnapshot.getValue(Post.class);
+
+                if(post.getDescription()!="")
+                {
+                    deletePost.setVisibility(View.VISIBLE);
+
+                    namePost.setText(post.getName());
+                    emailPost.setText(post.getEmail());
+                    datePost.setText(post.getDate());
+                    desPost.setText(post.getDescription());
+                    classPost.setText(post.getClasses());
+                    subjectPost.setText(post.getSubjects());
+                    dayPost.setText(post.getDays());
+                    salaryPost.setText(post.getSalary());
+                    addressPost.setText(post.getAddress());
+                    contactPost.setText(post.getContact());
+                }
+                else
+                {
+                    emptyPost.setText("No Post Available");
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
-        });
+        });*/
         super.onResume();
     }
 
@@ -105,8 +130,6 @@ public class MyPostActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         if(view.getId()==R.id.deletePostButtonId)
         {
-
-
             postName="";
             postEmail="";
             postDate="";

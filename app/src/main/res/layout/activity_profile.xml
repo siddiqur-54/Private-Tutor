@@ -17,7 +17,7 @@
         <Button
             android:id="@+id/findTuitionButtonId"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
             android:backgroundTint="@color/colorButton"
             android:text="FIND TUITION"
             android:textSize="20sp"
@@ -26,7 +26,7 @@
         <Button
             android:id="@+id/findTutorButtonId"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
             android:backgroundTint="@color/colorButton"
             android:text="FIND TUTOR"
             android:textSize="20sp"
@@ -41,16 +41,25 @@
         <Button
             android:id="@+id/postTuitionButtonId"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
             android:backgroundTint="@color/colorButton"
             android:text="POST TUITION"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/myPostButtonId"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:backgroundTint="@color/colorButton"
+            android:text="MY POST"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
             android:id="@+id/editProfileButtonId"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
             android:backgroundTint="@color/colorButton"
             android:text="EDIT PROFILE"
             android:textSize="20sp"
@@ -65,18 +74,18 @@
         <Button
             android:id="@+id/contactButtonId"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
             android:backgroundTint="@color/colorButton"
             android:text="CONTACT US"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/helpButtonId"
+            android:id="@+id/signOutButtonId"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
             android:backgroundTint="@color/colorButton"
-            android:text="HELP"
+            android:text="SIGN OUT"
             android:textSize="20sp"
             android:textStyle="bold" />
 

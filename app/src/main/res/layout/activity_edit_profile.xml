@@ -48,7 +48,7 @@
         android:id="@+id/updateButtonId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SIGN UP"
+        android:text="UPDATE PROFILE"
         android:textSize="20sp"
         android:textStyle="bold"/>
     <ProgressBar

@@ -25,27 +25,22 @@ public class SearchTuitionActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     private List<Post> postList;
     private CustomAdapter customAdapter;
-    FirebaseAuth mAuth;
-    String uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_tuition);
         setTitle("TUITION LIST");
 
-        mAuth=FirebaseAuth.getInstance();
-
         postList = new ArrayList<>();
         customAdapter = new CustomAdapter(SearchTuitionActivity.this, postList);
         listView = findViewById(R.id.listViewId);
     }
-    public void onStart(){
+    public void onResume(){
 
         final String searchValueClass=getIntent().getStringExtra("searchValueClass");
         final String searchValueSubject=getIntent().getStringExtra("searchValueSubject");
 
-        uid=mAuth.getCurrentUser().getUid();
-        databaseReference=FirebaseDatabase.getInstance().getReference("tuition").child(uid);
+        databaseReference=FirebaseDatabase.getInstance().getReference("tuition");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -55,7 +50,7 @@ public class SearchTuitionActivity extends AppCompatActivity {
                 {
                     Post post=dataSnapshot1.getValue(Post.class);
 
-                    if(post.getDescription()!="") {
+                    if(!post.getDescription().isEmpty()) {
 
                         String mainValueClass = post.getClasses();
                         String mainValueSubject = post.getSubjects();
@@ -78,7 +73,7 @@ public class SearchTuitionActivity extends AppCompatActivity {
             }
         });
 
-        super.onStart();
+        super.onResume();
     }
 }
 
