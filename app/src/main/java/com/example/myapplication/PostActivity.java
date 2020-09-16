@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,8 +11,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class PostActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -19,6 +28,9 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
             postSalaryEditText,postAddressEditText,postContactEditText;
     private Button postButton;
     DatabaseReference databaseReference;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
+    String uid,name,email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +38,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_post);
         setTitle("POST TUITION");
 
-        databaseReference= FirebaseDatabase.getInstance().getReference("Posts");
+        mAuth=FirebaseAuth.getInstance();
 
         postDescriptionEditText=(EditText)findViewById(R.id.postDescriptionEditTextId);
         postClassEditText=(EditText)findViewById(R.id.postClassEditTextId);
@@ -37,7 +49,41 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         postContactEditText=(EditText)findViewById(R.id.postContactEditTextId);
         postButton=(Button)findViewById(R.id.postButtonId);
 
+        postButton.setVisibility(View.INVISIBLE);
         postButton.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+
+        uid=mAuth.getCurrentUser().getUid();
+
+        databaseReference=FirebaseDatabase.getInstance().getReference("tutor").child(uid);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Tutor tutor=dataSnapshot.getValue(Tutor.class);
+                name=tutor.getName();
+
+                if(name=="")
+                {
+                    Toast.makeText(getApplicationContext(),"Please set up your profile first",Toast.LENGTH_LONG).show();
+                    Intent intent=new Intent(getApplicationContext(),ProfileActivity.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    postButton.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        super.onResume();
     }
 
     public void onClick(View view) {
@@ -60,11 +106,19 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         int access=check(description,classes,subject,days,salary,address,contact);
         if(access==1)
         {
-        String key=databaseReference.push().getKey();
-        Post post=new Post(description,classes,subject,days,salary,address,contact);
+            uid=mAuth.getCurrentUser().getUid();
+            databaseReference=FirebaseDatabase.getInstance().getReference("tuition");
 
-        databaseReference.child(key).setValue(post);
-        Toast.makeText(getApplicationContext(),"Post is added",Toast.LENGTH_LONG).show();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd--HH:mm:ss", Locale.getDefault());
+            String date = sdf.format(new Date());
+
+            user=mAuth.getCurrentUser();
+            email=user.getEmail();
+
+            Post post=new Post(name,email,date,description,classes,subject,days,salary,address,contact);
+
+            databaseReference.child(uid).setValue(post);
+            Toast.makeText(getApplicationContext(),"Post is added",Toast.LENGTH_LONG).show();
         }
     }
 

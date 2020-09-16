@@ -1,20 +1,19 @@
 package com.example.myapplication;
 
 public class Tutor {
-    private String name,institution,classes,subject,salary,email,contact;
+    private String name,institution,classes,subject,salary,contact;
 
     public Tutor()
     {
 
     }
 
-    public Tutor(String name, String institution, String classes, String subject, String salary, String contact, String email) {
+    public Tutor(String name, String institution, String classes, String subject, String salary, String contact) {
         this.name = name;
         this.institution = institution;
         this.classes = classes;
         this.subject = subject;
         this.salary = salary;
-        this.email = email;
         this.contact = contact;
     }
 
@@ -56,14 +55,6 @@ public class Tutor {
 
     public void setSalary(String salary) {
         this.salary = salary;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getContact() {

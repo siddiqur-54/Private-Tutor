@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.List;
 
 import static com.example.myapplication.R.layout.sampletutor_layout;
@@ -16,6 +19,8 @@ public class CustomAdapterTutor extends ArrayAdapter<Tutor> {
 
     private Activity context;
     private List<Tutor> tutorList;
+    FirebaseUser user;
+    FirebaseAuth mAuth;
 
     public CustomAdapterTutor(Activity context,List<Tutor> tutorList) {
         super(context,R.layout.sampletutor_layout,tutorList);
@@ -31,6 +36,9 @@ public class CustomAdapterTutor extends ArrayAdapter<Tutor> {
 
         Tutor tutor=tutorList.get(position);
 
+        mAuth=FirebaseAuth.getInstance();
+        user=mAuth.getCurrentUser();
+
         TextView tv1=view.findViewById(R.id.nameTextViewId);
         TextView tv2=view.findViewById(R.id.institutionTextViewId);
         TextView tv3=view.findViewById(R.id.classTextViewId);
@@ -45,7 +53,7 @@ public class CustomAdapterTutor extends ArrayAdapter<Tutor> {
         tv4.setText(tutor.getSubject());
         tv5.setText(tutor.getSalary());
         tv6.setText(tutor.getContact());
-        tv7.setText(tutor.getEmail());
+        tv7.setText(user.getEmail());
 
         return view;
     }

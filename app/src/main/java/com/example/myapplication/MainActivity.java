@@ -1,85 +1,103 @@
 package com.example.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button findTuitionButton,findTutorButton,postTuitionButton,
-            helpButton,contactButton,registerButton;
-    FirebaseAuth mAuth;
+    private EditText signInEmailEditText,signInPasswordEditText;
+    private Button signInButton,signUpButton;
+    private FirebaseAuth mAuth;
+    private ProgressBar progressBar;
+    private String email,password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("HOME PAGE");
 
         mAuth=FirebaseAuth.getInstance();
+        progressBar=findViewById(R.id.progressBarId);
 
-        findTuitionButton=(Button)findViewById(R.id.findTuitionButtonId);
-        findTutorButton=(Button)findViewById(R.id.findTutorButtonId);
-        postTuitionButton=(Button)findViewById(R.id.postTuitionButtonId);
-        helpButton=(Button)findViewById(R.id.helpButtonId);
-        contactButton=(Button)findViewById(R.id.contactButtonId);
-        registerButton=(Button)findViewById(R.id.registerButtonId);
 
-        findTuitionButton.setOnClickListener(this);
-        findTutorButton.setOnClickListener(this);
-        postTuitionButton.setOnClickListener(this);
-        helpButton.setOnClickListener(this);
-        contactButton.setOnClickListener(this);
-        registerButton.setOnClickListener(this);
+        signInButton=(Button)findViewById(R.id.signInButtonId);
+        signUpButton=(Button)findViewById(R.id.signUpHereButtonId);
+        signInEmailEditText=(EditText)findViewById(R.id.signInEmailEditTextId);
+        signInPasswordEditText=(EditText)findViewById(R.id.signInPasswordEditTextId);
 
+        signInButton.setOnClickListener(this);
+        signUpButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.findTuitionButtonId)
+        if(view.getId()==R.id.signUpHereButtonId)
         {
-            Intent intent=new Intent(MainActivity.this,FindTuitionActivity.class);
+            Intent intent=new Intent(MainActivity.this,SignUpActivity.class);
             startActivity(intent);
         }
-        else if(view.getId()==R.id.findTutorButtonId)
+        else if(view.getId()==R.id.signInButtonId)
         {
-            Intent intent=new Intent(MainActivity.this,FindTutorActivity.class);
-            startActivity(intent);
+            Login();
         }
-        else if(view.getId()==R.id.postTuitionButtonId)
+    }
+
+    public void Login()
+    {
+        email=signInEmailEditText.getText().toString().trim();
+        password=signInPasswordEditText.getText().toString().trim();
+
+        if(email.isEmpty())
         {
-            if(mAuth.getCurrentUser()!=null)
-            {
-                Intent intent=new Intent(MainActivity.this,PostActivity.class);
-                startActivity(intent);
-            }
-            else
-            {
-                Toast.makeText(getApplicationContext(),"Sign in first",Toast.LENGTH_LONG).show();
-                Intent intent=new Intent(getApplicationContext(),SignInActivity.class);
-                startActivity(intent);
-            }
+            signInEmailEditText.setError("Please enter an email");
+            signInEmailEditText.requestFocus();
+            return;
         }
-        else if(view.getId()==R.id.helpButtonId)
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
         {
-            Intent intent=new Intent(MainActivity.this,HelpActivity.class);
-            startActivity(intent);
+            signInEmailEditText.setError("Please enter a valid email");
+            signInEmailEditText.requestFocus();
+            return;
         }
-        else if(view.getId()==R.id.contactButtonId)
+        if(password.length()<5)
         {
-            Intent intent=new Intent(MainActivity.this,ContactActivity.class);
-            startActivity(intent);
+            signInPasswordEditText.setError("password length minimum 5 characters");
+            signInPasswordEditText.requestFocus();
+            return;
         }
-        else if(view.getId()==R.id.registerButtonId)
-        {
-            Intent intent=new Intent(MainActivity.this,SignInActivity.class);
-            startActivity(intent);
-        }
+        progressBar.setVisibility(View.VISIBLE);
+
+        mAuth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        progressBar.setVisibility(View.GONE);
+                        if(task.isSuccessful())
+                        {
+                            finish();
+                            Toast.makeText(getApplicationContext(),"Login successful",Toast.LENGTH_LONG).show();
+                            Intent intent=new Intent(MainActivity.this,VerifyActivity.class);
+                            startActivity(intent);
+                        }
+                        else
+                        {
+                            Toast.makeText(getApplicationContext(),"Login unsuccessful",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 }

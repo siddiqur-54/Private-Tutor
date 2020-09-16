@@ -29,6 +29,9 @@ public class CustomAdapter extends ArrayAdapter<Post> {
 
         Post post=postList.get(position);
 
+        TextView t11=view.findViewById(R.id.nameTextViewId);
+        TextView t12=view.findViewById(R.id.emailTextViewId);
+        TextView t13=view.findViewById(R.id.dateTextVIewId);
         TextView t1=view.findViewById(R.id.postDescriptionTextViewId);
         TextView t2=view.findViewById(R.id.postClassTextViewId);
         TextView t3=view.findViewById(R.id.postSubjectTextViewId);
@@ -37,9 +40,12 @@ public class CustomAdapter extends ArrayAdapter<Post> {
         TextView t6=view.findViewById(R.id.postAddressTextViewId);
         TextView t7=view.findViewById(R.id.postContactTextViewId);
 
+        t11.setText(post.getName());
+        t12.setText(post.getEmail());
+        t13.setText(post.getDate());
         t1.setText(post.getDescription());
         t2.setText(post.getClasses());
-        t3.setText(post.getSubject());
+        t3.setText(post.getSubjects());
         t4.setText(post.getDays());
         t5.setText(post.getSalary());
         t6.setText(post.getAddress());

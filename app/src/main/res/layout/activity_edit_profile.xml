@@ -5,45 +5,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="15sp"
-    tools:context=".SignInActivity">
+    android:padding="20sp"
+    tools:context=".EditProfileActivity">
 
     <EditText
-        android:id="@+id/signInEmailEditTextId"
+        android:id="@+id/editNameId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="EMAIL"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:hint="NAME"/>
     <EditText
-        android:id="@+id/signInPasswordEditTextId"
+        android:id="@+id/editInstitutionId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="PASSWORD"
+        android:textStyle="bold"
+        android:hint="INSTITUTION"/>
+    <EditText
+        android:id="@+id/editContactId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="CONTACT NO."/>
+    <EditText
+        android:id="@+id/editClassId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="CLASSES WANTS TO TEACH"/>
+    <EditText
+        android:id="@+id/editSubjectId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="SUBJECTS WANTS TO TEACH"/>
+    <EditText
+        android:id="@+id/editSalaryId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:hint="SALARY EXPECTATION"/>
+    <Button
+        android:id="@+id/updateButtonId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SIGN UP"
         android:textSize="20sp"
         android:textStyle="bold"/>
-    <Button
-        android:id="@+id/signInButtonId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SIGN IN"
-        android:textStyle="bold"
-        android:textSize="20sp"/>
-    <Button
-        android:id="@+id/signUpHereButtonId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="NOT REGISTERED YET!SIGN UP HERE"
-        android:textStyle="bold"
-        android:textSize="15sp"/>
-    <Button
-        android:id="@+id/myProfileButtonId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="MY PROFILE"
-        android:textStyle="bold"
-        android:textSize="20sp"/>
-
     <ProgressBar
         android:id="@+id/progressBarId"
         android:visibility="gone"

@@ -5,26 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20sp"
-    tools:context=".SignUpActivity">
+    android:padding="15sp"
+    tools:context=".MyPostActivity">
 
-    <EditText
-        android:id="@+id/signUpEmailId"
+
+    <TextView
+        android:id="@+id/notVerifiedId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:hint="EMAIL"/>
-    <EditText
-        android:id="@+id/signUpPasswordId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:hint="PASSWORD"/>
+        android:text=""
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
     <Button
-        android:id="@+id/signUpButtonId"
+        android:id="@+id/verifyButtonId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SIGN UP"
+        android:text="VERIFY EMAIL"
         android:textStyle="bold"
         android:textSize="20sp"/>
     <ProgressBar
@@ -33,5 +30,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
+
 
 </LinearLayout>

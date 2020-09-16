@@ -4,6 +4,31 @@ android:orientation="vertical" android:layout_width="match_parent"
     android:padding="15sp"
 android:layout_height="match_parent">
 
+
+    <TextView
+        android:id="@+id/nameTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Siddiqur"
+        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
+        />
+    <TextView
+        android:id="@+id/emailTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Siddiqur"
+        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
+        />
+    <TextView
+        android:id="@+id/dateTextVIewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Siddiqur"
+        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,12 +37,12 @@ android:layout_height="match_parent">
         android:textStyle="bold"
         />
     <TextView
-    android:id="@+id/postDescriptionTextViewId"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Siddiqur"
-    android:textSize="20sp"
-    android:layout_marginBottom="5dp"
+        android:id="@+id/postDescriptionTextViewId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Siddiqur"
+        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
     />
 
     <TextView

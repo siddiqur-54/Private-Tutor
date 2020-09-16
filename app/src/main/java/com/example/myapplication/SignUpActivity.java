@@ -22,12 +22,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private EditText signUpEmail,signUpPassword,signUpName,signUpInstitution,signUpClass,signUpContact,signUpSubject,signUpSalary;
+    private EditText signUpEmail,signUpPassword;
     private Button signUpButton;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
     private  Intent intent;
     DatabaseReference databaseReference;
+    private String uid,postName,postEmail,postDate,postDescription,postClass,postSubject,postDay,
+            postSalary,postAddress,postContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +37,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_sign_up);
         setTitle("SIGN UP");
 
-        databaseReference= FirebaseDatabase.getInstance().getReference("Tutors");
-
         mAuth = FirebaseAuth.getInstance();
         progressBar=findViewById(R.id.progressBarId);
-
-
 
         signUpEmail=(EditText)findViewById(R.id.signUpEmailId);
         signUpPassword=(EditText)findViewById(R.id.signUpPasswordId);
         signUpButton=(Button)findViewById(R.id.signUpButtonId);
-        signUpName=(EditText)findViewById(R.id.signUpNameId);
-        signUpInstitution=(EditText)findViewById(R.id.signUpInstitutionId);
-        signUpClass=(EditText)findViewById(R.id.signUpClassId);
-        signUpSubject=(EditText)findViewById(R.id.signUpSubjectId);
-        signUpSalary=(EditText)findViewById(R.id.signUpSalaryId);
-        signUpContact=(EditText)findViewById(R.id.signUpContactId);
 
         signUpButton.setOnClickListener(this);
     }
@@ -98,6 +90,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         {
                             saveTutor();
                             Toast.makeText(getApplicationContext(),"Registration is successful",Toast.LENGTH_LONG).show();
+                            Intent intent=new Intent(getApplicationContext(),VerifyActivity.class);
+                            startActivity(intent);
                         }
                         else
                         {
@@ -116,17 +110,34 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     public void saveTutor()
     {
-        String name=signUpName.getText().toString().trim();
-        String email=signUpEmail.getText().toString().trim();
-        String contact=signUpContact.getText().toString().trim();
-        String institution=signUpInstitution.getText().toString().trim();
-        String subject=signUpSubject.getText().toString().trim();
-        String classes=signUpClass.getText().toString().trim();
-        String salary=signUpSalary.getText().toString().trim();
-        String key=databaseReference.push().getKey();
-        Tutor tutor=new Tutor(name,institution,classes,subject,salary,contact,email);
+        String name="";
+        String contact="";
+        String institution="";
+        String subject="";
+        String classes="";
+        String salary="";
+        Tutor tutor=new Tutor(name,institution,classes,subject,salary,contact);
 
-        databaseReference.child(key).setValue(tutor);
+        postName="";
+        postEmail="";
+        postDate="";
+        postDescription="";
+        postClass="";
+        postSubject="";
+        postDay="";
+        postSalary="";
+        postAddress="";
+        postContact="";
+        Post post=new Post(postName,postEmail,postDate,postDescription,postClass,postSubject,postDay,postSalary,postAddress,postContact);
+
+        uid=mAuth.getCurrentUser().getUid();
+        databaseReference=FirebaseDatabase.getInstance().getReference("tutor");
+
+        databaseReference.child(uid).setValue(tutor);
         Toast.makeText(getApplicationContext(),"Tutor is added",Toast.LENGTH_LONG).show();
+
+        databaseReference=FirebaseDatabase.getInstance().getReference("tuition");
+
+        databaseReference.child(uid).setValue(post);
     }
 }

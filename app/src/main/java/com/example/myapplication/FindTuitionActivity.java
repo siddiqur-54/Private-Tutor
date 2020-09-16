@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,22 +25,25 @@ import static com.example.myapplication.R.id.searchTuitionClassEditTextId;
 public class FindTuitionActivity extends AppCompatActivity implements View.OnClickListener {
     private ListView listView;
     DatabaseReference databaseReference;
+    FirebaseAuth mAuth;
     private List<Post> postList;
     private CustomAdapter customAdapter;
     private Button searchTuitionButton;
     private EditText searchTuitionClassEditText,searchTuitionSubjectEditText;
+    String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_tuition);
-        setTitle("TUITIONS LIST");
+        setTitle("TUITION LIST");
+
+        mAuth=FirebaseAuth.getInstance();
 
         searchTuitionButton=(Button)findViewById(R.id.searchTuitionButtonId);
         searchTuitionClassEditText=(EditText)findViewById(R.id.searchTuitionClassEditTextId);
         searchTuitionSubjectEditText=(EditText)findViewById(R.id.searchTuitionSubjectEditTextId);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
         postList = new ArrayList<>();
         customAdapter = new CustomAdapter(FindTuitionActivity.this, postList);
         listView = findViewById(R.id.listViewId);
@@ -47,6 +51,9 @@ public class FindTuitionActivity extends AppCompatActivity implements View.OnCli
         searchTuitionButton.setOnClickListener(this);
     }
     public void onStart(){
+        uid=mAuth.getCurrentUser().getUid();
+        databaseReference=FirebaseDatabase.getInstance().getReference("tuition").child(uid);
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -54,7 +61,11 @@ public class FindTuitionActivity extends AppCompatActivity implements View.OnCli
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
                 {
                     Post post=dataSnapshot1.getValue(Post.class);
-                    postList.add(post);
+
+                    if(post.getDescription()!="")
+                    {
+                        postList.add(post);
+                    }
                 }
 
                 listView.setAdapter(customAdapter);

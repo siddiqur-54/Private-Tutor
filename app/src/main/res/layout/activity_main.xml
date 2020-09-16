@@ -5,80 +5,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10sp"
-    android:background="@color/colorBackground"
+    android:padding="15sp"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/signInEmailEditTextId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/findTuitionButtonId"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:backgroundTint="@color/colorButton"
-            android:text="FIND TUITION"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/findTutorButtonId"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:backgroundTint="@color/colorButton"
-            android:text="FIND TUTOR"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <LinearLayout
+        android:hint="EMAIL"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+    <EditText
+        android:id="@+id/signInPasswordEditTextId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/postTuitionButtonId"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:backgroundTint="@color/colorButton"
-            android:text="POST TUITION"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/registerButtonId"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:backgroundTint="@color/colorButton"
-            android:text="REGISTER"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <LinearLayout
+        android:hint="PASSWORD"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+    <Button
+        android:id="@+id/signInButtonId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:text="SIGN IN"
+        android:textStyle="bold"
+        android:textSize="20sp"/>
+    <Button
+        android:id="@+id/signUpHereButtonId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NOT REGISTERED YET!SIGN UP HERE"
+        android:textStyle="bold"
+        android:textSize="15sp"/>
 
-        <Button
-            android:id="@+id/contactButtonId"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:backgroundTint="@color/colorButton"
-            android:text="CONTACT US"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+    <ProgressBar
+        android:id="@+id/progressBarId"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
-        <Button
-            android:id="@+id/helpButtonId"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:backgroundTint="@color/colorButton"
-            android:text="HELP"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
 </LinearLayout>
